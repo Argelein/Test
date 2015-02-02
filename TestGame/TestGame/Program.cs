@@ -6,58 +6,36 @@ using System.Threading.Tasks;
 
 namespace TestGame
 {
-    //class Person
-    //{
-    //    public int XCoord;
-    //    public int YCoord;
-
-    //}
-
-    //class World
-    //{
-    //    private string Type;
-    //    private int XSize, YSize;
-    //    public Person MainCharacter;
-    //    char[,] Terrain;
-
-    //    public World(int XSize, int YSize);
-    //    {
-    //        this.XSize = 100;
-    //        this.YSize = 100;
-    //    }
-    //}
-
-
     class Program
     {
-        static char[,] GenerateBarrenWorld(int WorldXSize, int WorldYSize, int rockrate)
-        {
-            //create world array
-            char[,] World = new char[WorldXSize, WorldYSize];
-            //create randomizer
-            Random rnd = new Random();
-            char tile = ' ';
-            //fill world array
-            for (int x = 0; x < WorldXSize; x++)
-            {
-                for (int y = 0; y < WorldYSize; y++)
-                {
-                    int dice = rnd.Next(1, rockrate + 1);
-                    if (dice == rockrate)
-                    {
-                        tile = '^';
-                    }
-                    else
-                    {
-                        tile = '_';
-                    }
-                    World[x, y] = tile;
-                    //Console.Write("{0,6}", rnd.Next(-100, 101));
-                }
-                //Console.WriteLine();
-            }
-            return World;
-        }
+        //static char[,] GenerateBarrenWorld(int WorldXSize, int WorldYSize, int rockrate)
+        //{
+        //    //create world array
+        //    char[,] World = new char[WorldXSize, WorldYSize];
+        //    //create randomizer
+        //    Random rnd = new Random();
+        //    char tile = ' ';
+        //    //fill world array
+        //    for (int x = 0; x < WorldXSize; x++)
+        //    {
+        //        for (int y = 0; y < WorldYSize; y++)
+        //        {
+        //            int dice = rnd.Next(1, rockrate + 1);
+        //            if (dice == rockrate)
+        //            {
+        //                tile = '^';
+        //            }
+        //            else
+        //            {
+        //                tile = '_';
+        //            }
+        //            World[x, y] = tile;
+        //            //Console.Write("{0,6}", rnd.Next(-100, 101));
+        //        }
+        //        //Console.WriteLine();
+        //    }
+        //    return World;
+        //}
 
         static char[,] CreateInterface(int UIWidth, int UIHeight)
         {
@@ -148,24 +126,21 @@ namespace TestGame
             Console.SetCursorPosition(0, UIHeight - 15);
         }
 
-        static char[,] CreateScreenOutput(char[,] World, char[,] Interface, int XCoord, int YCoord)
+        static char[,] CreateScreenOutput(World World, char[,] Interface)
         {
             //get world size
-            int WorldXSize = World.GetLength(0);
-            int WorldYSize = World.GetLength(1);
+            int WorldXSize = (World.GetSize())[0];
+            int WorldYSize = (World.GetSize())[1];
             //get interface size
             int UIWidth = Interface.GetLength(0);
             int UIHeight = Interface.GetLength(1);
+            //get coordinates
+            int XCoord = (World.MainCharacter.GetCoords())[0];
+            int YCoord = (World.MainCharacter.GetCoords())[1];
             //create array for output
             char[,] ScreenOutput = new char[UIWidth, UIHeight];
 
-            // set window params
-            //Console.Clear();
-            //Console.SetWindowSize(UIWidth, UIHeight);
-            //Console.BufferHeight = UIHeight*2;
-            //Console.BufferWidth = UIWidth*2;
-
-            //draw the world
+            //create ScreenOutput array
             for (int y = 0; y < UIHeight; y++)
             {
                 for (int x = 0; x < UIWidth; x++)
@@ -204,7 +179,7 @@ namespace TestGame
                     {
                         if ((XCoord > (((int)((UIWidth - 20) / 2)) - x)) && (YCoord > ((int)((UIHeight - 20) / 2)) - y) && ((XCoord - (((int)((UIWidth - 20) / 2)) - x)) < WorldXSize) && ((YCoord - (((int)((UIHeight - 20) / 2)) - y)) < WorldYSize))
                         {
-                            ScreenOutput[x, y] = World[XCoord - (((int)((UIWidth - 20) / 2)) - x), YCoord - (((int)((UIHeight - 20) / 2)) - y)];
+                            ScreenOutput[x, y] = World.GetTerrainTile(XCoord - (((int)((UIWidth - 20) / 2)) - x), YCoord - (((int)((UIHeight - 20) / 2)) - y));
                             continue;
                         }
                         else
@@ -223,57 +198,54 @@ namespace TestGame
             return ScreenOutput;
         }
 
-        static int Move(ref int XCoord, ref int YCoord)
+        static int InputControl(World World, ConsoleKeyInfo cki)
         {
             //set starting console params
-            ConsoleKeyInfo cki;
+            //ConsoleKeyInfo cki;
             //Console.TreatControlCAsInput = true;
             //Console.CursorVisible = false;
             //Console.SetCursorPosition(xwidth, ywidth);
 
             //handle control
-            cki = Console.ReadKey();
+            //cki = Console.ReadKey();
             switch (cki.Key)
             {
                 case ConsoleKey.NumPad1:
-                    XCoord--;
-                    YCoord++;
+                    World.MainCharacter.Move(1);
                     //Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop - 1);
                     return 0;
                 case ConsoleKey.NumPad2:
-                    //XCoord;
-                    YCoord++;
+                    World.MainCharacter.Move(2);
                     //Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
                     return 0;
                 case ConsoleKey.NumPad3:
-                    XCoord++;
-                    YCoord++;
+                    World.MainCharacter.Move(3);
                     //Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop - 1);
                     return 0;
                 case ConsoleKey.NumPad4:
-                    XCoord--;
+                    World.MainCharacter.Move(4);
                     //YCoord;
                     //Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
                     return 0;
-                //case NumPad5:
+                case ConsoleKey.NumPad5:
+                    World.MainCharacter.Move(5);
+                    return 0;
                 case ConsoleKey.NumPad6:
-                    XCoord++;
+                    World.MainCharacter.Move(6);
                     //YCoord;
                     //Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
                     return 0;
                 case ConsoleKey.NumPad7:
-                    XCoord--;
-                    YCoord--;
+                    World.MainCharacter.Move(7);
                     //Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop + 1);
                     return 0;
                 case ConsoleKey.NumPad8:
                     //XCoord;
-                    YCoord--;
+                    World.MainCharacter.Move(8);
                     //Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop + 1);
                     return 0;
                 case ConsoleKey.NumPad9:
-                    XCoord++;
-                    YCoord--;
+                    World.MainCharacter.Move(9);
                     //Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop + 1);
                     return 0;
                 //case NumPad:
@@ -295,19 +267,24 @@ namespace TestGame
             int XCoord = 40;
             int YCoord = 40;
             int ExitFlag = 0;
+            ConsoleKeyInfo cki;
+            World MainWorld = new World(WorldXSize, WorldYSize, WorldRockRate);
+            Person MainCharacter = new Person(MainWorld, XCoord, YCoord);
             char[,] Interface = new char[UIWidth, UIHeight];
             char[,] World = new char[WorldXSize, WorldYSize];
             char[,] ScreenOutput = new char[UIWidth, UIHeight];
             char[,] ScreenOutputOld = new char[UIWidth, UIHeight];
             Interface = CreateInterface(UIWidth, UIHeight);
-            World = GenerateBarrenWorld(WorldXSize, WorldYSize, WorldRockRate);
+            //MainWorld.GenerateBarrenWorld(WorldRockRate);
 
             for (; ; )
             {
                 ScreenOutputOld = ScreenOutput;
-                ScreenOutput = CreateScreenOutput(World, Interface, XCoord, YCoord);
+                ScreenOutput = CreateScreenOutput(MainWorld, Interface);
                 DrawScreenOutput(ScreenOutput, ScreenOutputOld);
-                ExitFlag = Move(ref XCoord, ref YCoord);
+                //handle control
+                cki = Console.ReadKey();
+                ExitFlag = InputControl(MainWorld,cki);
                 if (ExitFlag == 1)
                 {
                     break;
