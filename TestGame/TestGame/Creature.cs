@@ -8,17 +8,38 @@ namespace TestGame
 {
     class Creature
     {
+        //fields
         int XCoord, YCoord, hp, maxhp;
-        readonly int WorldXSize, WorldYSize;
+        public readonly int WorldXSize, WorldYSize;
 
+        //properties:
+        public int HP
+        {
+            get {return hp;}
+            set {hp = value;}
+        }
+        public int MAXHP
+        {
+            get { return maxhp; }
+            set { maxhp = value; }
+        }
+        public int X
+        {
+            get { return XCoord; }
+            set { XCoord = value; }
+        }
+        public int Y
+        {
+            get { return YCoord; }
+            set { YCoord = value; }
+        }
         //constructors:
         protected Creature()
         {
             this.maxhp = 100;
             this.hp = this.maxhp;
         }
-
-        public Creature(World World)
+        public Creature(ref World World)
             :this()
         {
             this.XCoord = (int)((World.GetSize())[0]/2);
@@ -27,23 +48,20 @@ namespace TestGame
             this.WorldYSize = (World.GetSize())[1];
             
         }
-
-        public Creature(World World, int XCoord, int YCoord)
+        public Creature(ref World World, int XCoord, int YCoord)
             : this()
         {
             this.XCoord = XCoord;
             this.YCoord = YCoord;
-                        this.WorldXSize = (World.GetSize())[0];
+            this.WorldXSize = (World.GetSize())[0];
             this.WorldYSize = (World.GetSize())[1];
         }
-
-        public Creature(World World, int[] Coords)
-            :this(World, Coords[0], Coords[1])
+        public Creature(ref World World, int[] Coords)
+            :this(ref World, Coords[0], Coords[1])
         {
 
         }
-
-        public Creature(World World, int XCoord, int YCoord, int maxhp)
+        public Creature(ref World World, int XCoord, int YCoord, int maxhp)
         {
             this.XCoord = XCoord;
             this.YCoord = YCoord;
@@ -52,12 +70,10 @@ namespace TestGame
             this.maxhp = maxhp;
             this.hp = this.maxhp;
         }
-        public Creature(World World, int[] Coords, int maxhp)
-            : this(World, Coords[0], Coords[1], maxhp)
-        {
-
-        }
-
+        public Creature(ref World World, int[] Coords, int maxhp)
+            : this(ref World, Coords[0], Coords[1], maxhp) {   }
+        
+        //methods
         public int Move(int Direction)
         {
             switch (Direction)
@@ -105,18 +121,14 @@ namespace TestGame
                 this.YCoord = 0;
             return 0;
         }
-
         public virtual void Hit(int Direction)
         {
 
         }
-
         public int[] GetCoords()
         {
             int[] Coords = { this.XCoord, this.YCoord };
             return Coords;
         }
-
-
     }
 }

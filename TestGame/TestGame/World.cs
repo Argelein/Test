@@ -8,28 +8,28 @@ namespace TestGame
 {
     class World
     {
-        private string Type;
-        private int XSize, YSize;
+        //fields
+        protected string Type;
+        protected int XSize, YSize;
         public Person MainCharacter;
+        public Enemy[] Enemies;
         char[,] Terrain;
-
+        //constructor
         public World()
         {
             this.XSize = 100;
             this.YSize = 100;
             this.GenerateBarrenWorld(20);
-            this.MainCharacter = new Person(this);
-
+            //this.MainCharacter = new Person(ref this);
         }
-
         public World(int XSize, int YSize, int rockrate)
         {
             this.XSize = XSize;
             this.YSize = YSize;
             this.GenerateBarrenWorld(rockrate);
-            this.MainCharacter = new Person(this);
+            //this.MainCharacter = new Person(ref this);
         }
-
+        //methods
         public int[] GetSize()
         {
             int[] Size = new int[2];
@@ -39,7 +39,6 @@ namespace TestGame
             //YSize = this.YSize;
             return Size;
         }
-
         private void GenerateBarrenWorld(int rockrate)
         {
             if (Terrain == null)
