@@ -111,10 +111,10 @@ namespace TestGame
                 default:
                     break;
             }
-            if (this.XCoord > this.WorldXSize)
-                this.XCoord = this.WorldXSize;
-            if (this.YCoord > this.WorldYSize)
-                this.YCoord = this.WorldYSize;
+            if (this.XCoord > this.WorldXSize-1)
+                this.XCoord = this.WorldXSize-1;
+            if (this.YCoord > this.WorldYSize-1)
+                this.YCoord = this.WorldYSize-1;
             if (this.XCoord < 0)
                 this.XCoord = 0;
             if (this.YCoord < 0)

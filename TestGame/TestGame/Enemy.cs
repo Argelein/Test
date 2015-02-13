@@ -9,8 +9,9 @@ namespace TestGame
     class Enemy : Creature
     {
         //fields
-        int XCoord,YCoord, hp, maxhp;
-        readonly int WorldXSize, WorldYSize;
+        int HeroDirection, HeroDistance;
+        //int XCoord, YCoord, hp, maxhp, HeroDirection;
+        //readonly int WorldXSize, WorldYSize;
 
         //constructors:
         private Enemy() : base() { }
@@ -19,5 +20,28 @@ namespace TestGame
         public Enemy(ref World World, int[] Coords) : base(ref World, Coords) { }
         public Enemy(ref World World, int XCoord, int YCoord, int maxhp) : base(ref World, XCoord, YCoord, maxhp) { }
         public Enemy(ref World World, int[] Coords, int maxhp) : base(ref World, Coords, maxhp) { }
+
+        //methods
+        private void DetermineHeroDirection(World World)
+        {
+
+            HeroDirection = 5;
+        }
+        private void DetermineHeroDistance(World World)
+        {
+
+            this.HeroDistance = (int)(Math.Pow((X - World.MainCharacter.X), 2) + Math.Pow((Y - World.MainCharacter.Y), 2));
+            //math. //this.X
+            //HeroDirection = 5;
+        }
+
+        public int GetHeroDirection()
+        {
+            return HeroDirection;
+        }
+
+
+
+
     }
 }

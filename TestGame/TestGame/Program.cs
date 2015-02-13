@@ -43,11 +43,11 @@ namespace TestGame
             //starting parameters
             int UIWidth = 50;
             int UIHeight = 50;
-            int WorldXSize = 2000;
-            int WorldYSize = 2000;
+            int WorldXSize = 20;
+            int WorldYSize = 20;
             int WorldRockRate = 20;
-            int XCoord = 1000;
-            int YCoord = 1000;
+            int XCoord = 10;
+            int YCoord = 10;
 
             //defining variables
             int ExitFlag = 0;

@@ -14,6 +14,7 @@ namespace TestGame
         public Person MainCharacter;
         public Enemy[] Enemies;
         char[,] Terrain;
+
         //constructor
         public World()
         {
@@ -22,6 +23,7 @@ namespace TestGame
             this.GenerateBarrenWorld(20);
             //this.MainCharacter = new Person(ref this);
         }
+
         public World(int XSize, int YSize, int rockrate)
         {
             this.XSize = XSize;
@@ -39,6 +41,7 @@ namespace TestGame
             //YSize = this.YSize;
             return Size;
         }
+
         private void GenerateBarrenWorld(int rockrate)
         {
             if (Terrain == null)
@@ -73,6 +76,7 @@ namespace TestGame
                 Console.WriteLine("World is already Generated!");
             }
         }
+
         public char GetTerrainTile(int X,int Y)
         {
             return this.Terrain[X, Y];
