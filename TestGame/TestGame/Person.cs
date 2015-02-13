@@ -6,75 +6,118 @@ using System.Threading.Tasks;
 
 namespace TestGame
 {
-    class Person
+    class Person : Creature
     {
-        int XCoord,YCoord;
-        public Person()
-        {
-            this.XCoord = 0;
-            this.YCoord = 0;
-        }
+        //fields
+        int XCoord,YCoord, hp, maxhp;
+        readonly int WorldXSize, WorldYSize;
 
-        public Person(World World)
-        {
-            this.XCoord = (int)((World.GetSize())[0]/2);
-            this.YCoord = (int)((World.GetSize())[1]/2);
-        }
+        //constructors:
+        private Person() : base() { }
+        public Person(World World) : base(World) { }
+        public Person(World World, int XCoord, int YCoord) : base(World, XCoord, YCoord) { }
+        public Person(World World, int[] Coords) : base(World, Coords) { }
+        public Person(World World, int XCoord, int YCoord, int maxhp) : base(World, XCoord, YCoord, maxhp) { }
+        public Person(World World, int[] Coords, int maxhp) : base(World, Coords, maxhp) { }
 
-        public Person(World World, int XCoord, int YCoord)
-        {
-            this.XCoord = XCoord;
-            this.YCoord = YCoord;
-        }
-
-        public Person(World World, int[] Coords)
-            :this(World, Coords[0], Coords[1])
-        {
-
-        }
-
-        public int[] GetCoords()
-        {
-            int[] Coords = {this.XCoord,this.YCoord};
-            return Coords;
-        }
-        public int Move(int Direction)
+        //public int[] GetCoords()
+        //{
+        //    int[] Coords = {this.XCoord,this.YCoord};
+        //    return Coords;
+        //}
+        //public int Move(int Direction)
+        //{
+        //    switch (Direction)
+        //    {
+        //        case 1:
+        //            this.XCoord--;
+        //            this.YCoord++;
+        //            break;
+        //        case 2:
+        //            this.YCoord++;
+        //            break;
+        //        case 3:
+        //            this.XCoord++;
+        //            this.YCoord++;
+        //            break;
+        //        case 4:
+        //            this.XCoord--;
+        //            break;
+        //        case 5:
+        //            break;
+        //        case 6:
+        //            this.XCoord++;
+        //            break;
+        //        case 7:
+        //            this.XCoord--;
+        //            this.YCoord--;
+        //            break;
+        //        case 8:
+        //            this.YCoord--;
+        //            break;
+        //        case 9:
+        //            this.XCoord++;
+        //            this.YCoord--;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+        //    if (XCoord > WorldXSize)
+        //        XCoord = WorldXSize;
+        //    if (YCoord > WorldYSize)
+        //        YCoord = WorldYSize;
+        //    if (XCoord < 0)
+        //        XCoord = 0;
+        //    if (YCoord < 0)
+        //        YCoord = 0;
+        //    return 0;
+        //}
+        public override void Hit(int Direction)
         {
             switch (Direction)
             {
                 case 1:
                     this.XCoord--;
                     this.YCoord++;
-                    return 0;
+                    break;
                 case 2:
                     this.YCoord++;
-                    return 0;
+                    break;
                 case 3:
                     this.XCoord++;
                     this.YCoord++;
-                    return 0;
+                    break;
                 case 4:
                     this.XCoord--;
-                    return 0;
+                    break;
                 case 5:
-                    return 0;
+                    break;
                 case 6:
                     this.XCoord++;
-                    return 0;
+                    break;
                 case 7:
                     this.XCoord--;
                     this.YCoord--;
-                    return 0;
+                    break;
                 case 8:
                     this.YCoord--;
-                    return 0;
+                    break;
                 case 9:
                     this.XCoord++;
                     this.YCoord--;
-                    return 0;
+                    break;
                 default:
-                    return 0;
+                    break;
             }
+            if (XCoord > WorldXSize)
+                XCoord = WorldXSize;
+            if (YCoord > WorldYSize)
+                YCoord = WorldYSize;
+            if (XCoord < 0)
+                XCoord = 0;
+            if (YCoord < 0)
+                YCoord = 0;
+            //return 0;
         }
     }
 }

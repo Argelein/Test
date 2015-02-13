@@ -261,8 +261,8 @@ namespace TestGame
         {
             int UIWidth = 50;
             int UIHeight = 50;
-            int WorldXSize = 100;
-            int WorldYSize = 100;
+            int WorldXSize = 10;
+            int WorldYSize = 10;
             int WorldRockRate = 20;
             int XCoord = 40;
             int YCoord = 40;
