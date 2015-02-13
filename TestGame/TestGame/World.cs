@@ -10,17 +10,20 @@ namespace TestGame
     {
         //fields
         protected string Type;
-        protected int XSize, YSize;
+        protected int XSize, YSize, EnemyCap;
         public Person MainCharacter;
         public Enemy[] Enemies;
         char[,] Terrain;
 
-        //constructor
+
+        //constructors
         public World()
         {
             this.XSize = 100;
             this.YSize = 100;
             this.GenerateBarrenWorld(20);
+            this.EnemyCap = 100;
+            this.Enemies = new Enemy[EnemyCap];
             //this.MainCharacter = new Person(ref this);
         }
 
@@ -29,6 +32,8 @@ namespace TestGame
             this.XSize = XSize;
             this.YSize = YSize;
             this.GenerateBarrenWorld(rockrate);
+            this.EnemyCap = 100;
+            this.Enemies = new Enemy[EnemyCap];
             //this.MainCharacter = new Person(ref this);
         }
         //methods

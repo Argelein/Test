@@ -10,16 +10,17 @@ namespace TestGame
     {
         //fields
         int HeroDirection, HeroDistance;
+        bool alive;
         //int XCoord, YCoord, hp, maxhp, HeroDirection;
         //readonly int WorldXSize, WorldYSize;
 
         //constructors:
         private Enemy() : base() { }
-        public Enemy(ref World World) : base(ref World) { }
-        public Enemy(ref World World, int XCoord, int YCoord) : base(ref World, XCoord, YCoord) { }
-        public Enemy(ref World World, int[] Coords) : base(ref World, Coords) { }
-        public Enemy(ref World World, int XCoord, int YCoord, int maxhp) : base(ref World, XCoord, YCoord, maxhp) { }
-        public Enemy(ref World World, int[] Coords, int maxhp) : base(ref World, Coords, maxhp) { }
+        public Enemy(ref World World) : base(ref World) { World.Enemies[0] = this; }
+        public Enemy(ref World World, int XCoord, int YCoord) : base(ref World, XCoord, YCoord) { World.Enemies[0] = this; }
+        public Enemy(ref World World, int[] Coords) : base(ref World, Coords) { World.Enemies[0] = this; }
+        public Enemy(ref World World, int XCoord, int YCoord, int maxhp) : base(ref World, XCoord, YCoord, maxhp) { World.Enemies[0] = this; }
+        public Enemy(ref World World, int[] Coords, int maxhp) : base(ref World, Coords, maxhp) { World.Enemies[0] = this; }
 
         //methods
         private void DetermineHeroDirection(World World)

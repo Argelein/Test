@@ -56,6 +56,7 @@ namespace TestGame
             //creating instances
             World MainWorld = new World(WorldXSize, WorldYSize, WorldRockRate);
             Person MainCharacter = new Person(ref MainWorld, XCoord, YCoord);
+            Enemy FirstEnemy = new Enemy(ref MainWorld, XCoord, YCoord);
             //char[,] Interface = new char[UIWidth, UIHeight];
             //char[,] World = new char[WorldXSize, WorldYSize];
             //char[,] ScreenOutput = new char[UIWidth, UIHeight];
