@@ -12,7 +12,7 @@ namespace TestGame
         protected string Type;
         protected int XSize, YSize, EnemyCap;
         public Person MainCharacter;
-        public Enemy[] Enemies;
+        public List<Enemy> Enemies;
         char[,] Terrain;
 
 
@@ -23,7 +23,7 @@ namespace TestGame
             this.YSize = 100;
             this.GenerateBarrenWorld(20);
             this.EnemyCap = 100;
-            this.Enemies = new Enemy[EnemyCap];
+            this.Enemies = new List<Enemy>();
             //this.MainCharacter = new Person(ref this);
         }
 
@@ -33,7 +33,7 @@ namespace TestGame
             this.YSize = YSize;
             this.GenerateBarrenWorld(rockrate);
             this.EnemyCap = 100;
-            this.Enemies = new Enemy[EnemyCap];
+            this.Enemies = new List<Enemy>();
             //this.MainCharacter = new Person(ref this);
         }
         //methods
