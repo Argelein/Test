@@ -25,7 +25,7 @@ namespace TestGame
         //methods
         private void init(ref World World)
         {
-            World.Enemies[0] = this;
+            World.Enemies.Add(this);
             this.DetermineHeroDistance(World);
             this.DetermineHeroDirection(World);
         }
