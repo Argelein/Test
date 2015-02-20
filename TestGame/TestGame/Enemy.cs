@@ -10,6 +10,7 @@ namespace TestGame
     {
         //fields
         int HeroDirection, HeroDistance;
+        public Double angle;
         bool alive;
         //int XCoord, YCoord, hp, maxhp, HeroDirection;
         //readonly int WorldXSize, WorldYSize;
@@ -29,12 +30,15 @@ namespace TestGame
             this.DetermineHeroDistance(World);
             this.DetermineHeroDirection(World);
         }
-        private void DetermineHeroDirection(World World)
+        public void DetermineHeroDirection(World World)
         {
             
             Random rnd = new Random();
             //X or Y projection of Hero Distance
             int DistProj = (int)(Math.Sqrt(2) * this.HeroDistance);
+
+            Double Angle1 = Math.Atan2(0, 5) - Math.Atan2(World.MainCharacter.Y - this.Y, World.MainCharacter.X - this.X);
+            this.angle = Angle1;
             //directions array
             int[] dirs = {1,2,3,4,6,7,8,9};
             //result directions list
@@ -51,6 +55,7 @@ namespace TestGame
             check[7] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y + DistProj), 2));// direction 9 numpad
             //check[8] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y - DistProj), 2));
             //finding closest checkpoints and fixing them in dirres List
+            dirres.Clear();
             for (int i = 0; i < check.Length; i++)
             {
                 if (check[i] == check.Min())
@@ -68,7 +73,7 @@ namespace TestGame
                 this.HeroDirection = rnd.Next(dirres.Count);
             }
         }
-        private void DetermineHeroDistance(World World)
+        public void DetermineHeroDistance(World World)
         {
 
             this.HeroDistance = (int)(Math.Sqrt(Math.Pow((X - World.MainCharacter.X), 2) + Math.Pow((Y - World.MainCharacter.Y), 2)));
@@ -78,9 +83,18 @@ namespace TestGame
 
         public int GetHeroDirection()
         {
-            return HeroDirection;
+            return this.HeroDirection;
         }
-
+        public int GetHeroDistance()
+        {
+            return this.HeroDistance;
+        }
+        public void movetohero()
+        {
+            this.Move(this.HeroDirection);
+            //this.DetermineHeroDistance();
+            //this.DetermineHeroDirection();
+        }
 
 
 

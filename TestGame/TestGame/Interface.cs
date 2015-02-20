@@ -18,6 +18,7 @@ namespace TestGame
         const char RightBottomCornerChar = '╝';
         const char SideBorder = (char)9553;
         const char HeroSymbol = '*';
+        const char EnemySymbol = 'X';
         const char Blanc = ' ';
 
         //fields
@@ -120,9 +121,13 @@ namespace TestGame
                         
                         if ((XCoord > (((int)(this.framesizeX / 2)) - x)) && (YCoord > ((int)(this.framesizeY / 2)) - y) && ((XCoord - (((int)(this.framesizeX / 2)) - x )) < WorldXSize) && ((YCoord - (((int)(this.framesizeY / 2)) - y)) < WorldYSize))
                         {
-                            if ((x == (((int)(this.framesizeX / 2)) +1)) && (y == (((int)(this.framesizeY / 2)) +1)))
+                            if ((x == (((int)(this.framesizeX / 2)) + 1)) && (y == (((int)(this.framesizeY / 2)) + 1)))
                             {
-                                this.IFArray[x,y] = HeroSymbol;
+                                this.IFArray[x, y] = HeroSymbol;
+                            }
+                            else if ((World.Enemies[0].X == XCoord - (((int)(this.framesizeX / 2)) - x)) && (World.Enemies[0].Y == YCoord - (((int)(this.framesizeY / 2)) - y)))
+                            {
+                                this.IFArray[x, y] = EnemySymbol;
                             }
                             else
                             {
@@ -206,6 +211,23 @@ namespace TestGame
                     Console.WriteLine();
                 }
             }
+            Console.SetCursorPosition(0, this.UIHeight - 15);
+        }
+
+        public void DrawEnemyStats(World MainWorld)
+        {
+            Console.SetCursorPosition(this.UIWidth - 17, 10);
+            Console.Write("HP: {0}",MainWorld.Enemies[0].HP);
+            Console.SetCursorPosition(this.UIWidth - 17, 11);
+            Console.Write("X: {0}", MainWorld.Enemies[0].X);
+            Console.SetCursorPosition(this.UIWidth - 17, 12);
+            Console.Write("Y: {0}", MainWorld.Enemies[0].Y);
+            Console.SetCursorPosition(this.UIWidth - 17, 13);
+            Console.Write("Hdirec: {0}", MainWorld.Enemies[0].GetHeroDirection());
+            Console.SetCursorPosition(this.UIWidth - 17, 14);
+            Console.Write("Hdist: {0}", MainWorld.Enemies[0].GetHeroDistance());
+            Console.SetCursorPosition(this.UIWidth - 17, 15);
+            Console.Write("Angle: {0}", MainWorld.Enemies[0].angle *180 / 3.14);
             Console.SetCursorPosition(0, this.UIHeight - 15);
         }
 

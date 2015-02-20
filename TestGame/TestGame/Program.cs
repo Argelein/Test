@@ -56,12 +56,14 @@ namespace TestGame
             //creating instances
             World MainWorld = new World(WorldXSize, WorldYSize, WorldRockRate);
             Person MainCharacter = new Person(ref MainWorld, XCoord, YCoord);
-            Enemy FirstEnemy = new Enemy(ref MainWorld, XCoord, YCoord);
+            Enemy FirstEnemy = new Enemy(ref MainWorld, 11, 11);
+            MainWorld.Enemies.Add(FirstEnemy);
             //char[,] Interface = new char[UIWidth, UIHeight];
             //char[,] World = new char[WorldXSize, WorldYSize];
             //char[,] ScreenOutput = new char[UIWidth, UIHeight];
             //char[,] ScreenOutputOld = new char[UIWidth, UIHeight];
             Interface MainInterface = new Interface(UIWidth, UIHeight, MainWorld);
+            
 
             for (; ; )
             {
@@ -71,10 +73,13 @@ namespace TestGame
                 //handle control
                 MainInterface.FillIFArraywithWorld(MainWorld);
                 MainInterface.UpdatePlayerAttributes(MainWorld);
-
                 MainInterface.DrawScreenOutput(MainWorld);
+                MainInterface.DrawEnemyStats(MainWorld);
                 cki = Console.ReadKey();
                 ExitFlag = MainInterface.InputControl(MainWorld, cki);
+                //MainWorld.Enemies[0].movetohero();
+                MainWorld.Enemies[0].DetermineHeroDistance(MainWorld);
+                MainWorld.Enemies[0].DetermineHeroDirection(MainWorld);
                 if (ExitFlag == 1)
                 {
                     break;
