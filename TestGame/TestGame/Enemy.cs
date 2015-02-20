@@ -15,6 +15,10 @@ namespace TestGame
         //int XCoord, YCoord, hp, maxhp, HeroDirection;
         //readonly int WorldXSize, WorldYSize;
 
+        //const
+        const double rad22_5 = 0.39269908169872415480783042290994, rad67_5 = 1.1780972450961724644234912687298;
+        const double rad112_5 = 1.9634954084936207740391521145497, rad157_5 = 2.7488935718910690836548129603696;
+
         //constructors:
         private Enemy() : base() { }
         public Enemy(ref World World) : base(ref World) { this.init(ref World); }
@@ -32,47 +36,43 @@ namespace TestGame
         }
         public void DetermineHeroDirection(World World)
         {
-            
-            Random rnd = new Random();
-            //X or Y projection of Hero Distance
-            int DistProj = (int)(Math.Sqrt(2) * this.HeroDistance);
-
-            Double Angle1 = Math.Atan2(0, 5) - Math.Atan2(World.MainCharacter.Y - this.Y, World.MainCharacter.X - this.X);
-            this.angle = Angle1;
-            //directions array
-            int[] dirs = {1,2,3,4,6,7,8,9};
-            //result directions list
-            List<int> dirres = new List<int>();
-            //count checkpoints in all directions and their distances from enemy for direction determination
-            double[] check = new double[8];
-            check[0] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X - DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y - DistProj), 2));// direction 1 numpad
-            check[1] = Math.Sqrt(Math.Pow(this.X - World.MainCharacter.X, 2) + Math.Pow(this.Y - (World.MainCharacter.Y - this.HeroDistance), 2)); // direction 2 numpad
-            check[2] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y - DistProj), 2));// direction 3 numpad
-            check[3] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X - this.HeroDistance), 2) + Math.Pow(this.Y - (World.MainCharacter.Y), 2));// direction 4 numpad
-            check[4] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + this.HeroDistance), 2) + Math.Pow(this.Y - (World.MainCharacter.Y), 2));// direction 6 numpad
-            check[5] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X - DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y + DistProj), 2));// direction 7 numpad
-            check[6] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + this.HeroDistance), 2) + Math.Pow(this.Y - (World.MainCharacter.Y), 2));// direction 8 numpad
-            check[7] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y + DistProj), 2));// direction 9 numpad
-            //check[8] = Math.Sqrt(Math.Pow(this.X - (World.MainCharacter.X + DistProj), 2) + Math.Pow(this.Y - (World.MainCharacter.Y - DistProj), 2));
-            //finding closest checkpoints and fixing them in dirres List
-            dirres.Clear();
-            for (int i = 0; i < check.Length; i++)
+            //angle calculation
+            Double angle = Math.Atan2(0, 5) - Math.Atan2(World.MainCharacter.Y - this.Y, World.MainCharacter.X - this.X);
+            //direction 
+            if (angle <= rad22_5 && angle >= -rad22_5)
             {
-                if (check[i] == check.Min())
-                {
-                    dirres.Add(dirs[i]);
-                }
+                this.HeroDirection = 6;
             }
-            //fill this.HeroDirection with Hero direction
-            if (dirres.Count == 1)
+            else if (angle <= rad67_5 && angle >= rad22_5)
             {
-                this.HeroDirection = dirres[0];
+                this.HeroDirection = 9;
             }
-            else
+            else if (angle <= rad112_5 && angle >= rad67_5)
             {
-                this.HeroDirection = rnd.Next(dirres.Count);
+                this.HeroDirection = 8;
+            }
+            else if (angle <= rad157_5 && angle >= rad112_5)
+            {
+                this.HeroDirection = 7;
+            }
+            else if (angle <= -rad157_5 || angle >= rad157_5)
+            {
+                this.HeroDirection = 4;
+            }
+            else if (angle <= -rad112_5 && angle >= -rad157_5)
+            {
+                this.HeroDirection = 1;
+            }
+            else if (angle <= -rad67_5 && angle >= -rad112_5)
+            {
+                this.HeroDirection = 2;
+            }
+            else if (angle <= -rad22_5 && angle >= -rad67_5)
+            {
+                this.HeroDirection = 3;
             }
         }
+
         public void DetermineHeroDistance(World World)
         {
 

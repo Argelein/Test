@@ -121,7 +121,7 @@ namespace TestGame
                         
                         if ((XCoord > (((int)(this.framesizeX / 2)) - x)) && (YCoord > ((int)(this.framesizeY / 2)) - y) && ((XCoord - (((int)(this.framesizeX / 2)) - x )) < WorldXSize) && ((YCoord - (((int)(this.framesizeY / 2)) - y)) < WorldYSize))
                         {
-                            if ((x == (((int)(this.framesizeX / 2)) + 1)) && (y == (((int)(this.framesizeY / 2)) + 1)))
+                            if ((x == (((int)(this.framesizeX / 2)) )) && (y == (((int)(this.framesizeY / 2)) )))
                             {
                                 this.IFArray[x, y] = HeroSymbol;
                             }

@@ -71,13 +71,13 @@ namespace TestGame
                 //ScreenOutput = CreateScreenOutput(MainWorld, Interface);
                 //DrawScreenOutput(ScreenOutput, ScreenOutputOld);
                 //handle control
-                MainInterface.FillIFArraywithWorld(MainWorld);
-                MainInterface.UpdatePlayerAttributes(MainWorld);
+                //MainInterface.FillIFArraywithWorld(MainWorld);
+                //MainInterface.UpdatePlayerAttributes(MainWorld);
                 MainInterface.DrawScreenOutput(MainWorld);
                 MainInterface.DrawEnemyStats(MainWorld);
                 cki = Console.ReadKey();
                 ExitFlag = MainInterface.InputControl(MainWorld, cki);
-                //MainWorld.Enemies[0].movetohero();
+                MainWorld.Enemies[0].movetohero();
                 MainWorld.Enemies[0].DetermineHeroDistance(MainWorld);
                 MainWorld.Enemies[0].DetermineHeroDirection(MainWorld);
                 if (ExitFlag == 1)
