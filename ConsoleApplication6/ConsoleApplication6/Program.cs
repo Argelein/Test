@@ -10,18 +10,61 @@ namespace ConsoleApplication6
     {
         static void Main(string[] args)
         {
-            int test4000 = 4000;
-            int test400 = 400;
-            int test40 = 40;
-            int test4 = 4;
-            Console.WriteLine("int |{0}|, string |{1}|", test4000, test4000.ToString());
-            Console.WriteLine("int |{0}|, string |{1}|", test400, test400.ToString());
-            Console.WriteLine("int |{0}|, string |{1}|", test40, test40.ToString());
-            Console.WriteLine("int |{0}|, string |{1}|", test4, test4.ToString());
-            //test40 = 4;
-            Console.WriteLine("lengtht |{0}|", test40.ToString().Length);
-            Console.WriteLine("int |{0}|, string |{1}|, chars |{2}|{3}|", test40, test40.ToString(), test40.ToString()[0], test40.ToString()[1]);
-            //Console.WriteLine("int |{0}|, string |{1}|, chars |{2}|{3}|{4}|{5}|", test4, test4.ToString(), test4.ToString()[0],test4.ToString()[1], test4.ToString()[2], test4.ToString()[3]);
+            Class1 test1 = new Class1();
+            Class1 test2 = new Class1();
+            Class1 test3 = new Class1();
+            Class1 test4 = new Class1();
+            Class1 test5 = new Class1();
+            Class1 test6 = new Class1();
+
+            List<Class1> TestList = new List<Class1>();
+
+            TestList.Add(test1);
+            TestList.Add(test2);
+            TestList.Add(test3);
+            TestList.Add(test4);
+            TestList.Add(test5);
+            TestList.Add(test6);
+
+            
+            //IEnumerable<Class1>
+            Console.WriteLine("After init");
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test1.id,test1.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test2.id,test2.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test3.id,test3.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test4.id,test4.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test5.id,test5.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test6.id,test6.description);
+
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[0].id,TestList[0].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[1].id,TestList[1].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[2].id,TestList[2].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[3].id,TestList[3].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[4].id,TestList[4].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[5].id,TestList[5].description);
+
+            Console.WriteLine("List altering");
+
+            TestList[0].description = "listtest1";
+            TestList[1].description = "listtest2";
+            TestList[2].description = "listtest3";
+            TestList[3].description = "listtest4";
+            TestList[4].description = "listtest5";
+            TestList[5].description = "listtest6";
+
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test1.id,test1.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test2.id,test2.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test3.id,test3.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test4.id,test4.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test5.id,test5.description);
+            Console.WriteLine("test1 SA ID: {0}; Description: {1}.", test6.id,test6.description);
+
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[0].id,TestList[0].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[1].id,TestList[1].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[2].id,TestList[2].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[3].id,TestList[3].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[4].id,TestList[4].description);
+            Console.WriteLine("test1 in List ID: {0}; Description: {1}.", TestList[5].id,TestList[5].description);
 
             Console.ReadKey();
 
