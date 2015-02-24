@@ -58,6 +58,8 @@ namespace TestGame
             Person MainCharacter = new Person(ref MainWorld, XCoord, YCoord);
             Enemy FirstEnemy = new Enemy(ref MainWorld, 11, 11);
             MainWorld.Enemies.Add(FirstEnemy);
+            Enemy SecondEnemy = new Enemy(ref MainWorld, 1, 1);
+            MainWorld.Enemies.Add(SecondEnemy);
             //char[,] Interface = new char[UIWidth, UIHeight];
             //char[,] World = new char[WorldXSize, WorldYSize];
             //char[,] ScreenOutput = new char[UIWidth, UIHeight];
