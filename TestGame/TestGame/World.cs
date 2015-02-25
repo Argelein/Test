@@ -46,7 +46,6 @@ namespace TestGame
             //YSize = this.YSize;
             return Size;
         }
-
         private void GenerateBarrenWorld(int rockrate)
         {
             if (Terrain == null)
@@ -81,7 +80,6 @@ namespace TestGame
                 Console.WriteLine("World is already Generated!");
             }
         }
-
         public char GetTerrainTile(int X,int Y)
         {
             return this.Terrain[X, Y];

@@ -8,22 +8,24 @@ namespace Beren
 {
     class World
     {
+        //constants
+        const char rocktile = '^', plainstile = '_';
+        
         //fields
         readonly string Type;
         readonly int XSize, YSize;
-        Person MainCharacter;
+        Hero Beren;
         List<Enemy> Enemies;
+        //List<Enemy> DeadEnemies;
         Tile[,] WorldArray;
 
-        //constructors
-        //public World()
+        //properties
+        //public List<Enemy> Enemies
         //{
-        //    this.XSize = 100;
-        //    this.YSize = 100;
-        //    //this.GenerateBarrenWorld(20);
-        //    this.Enemies = new List<Enemy>();
-        //    //this.MainCharacter = new Person(ref this);
+        //    get { return enemies; }
         //}
+
+        //constructors
         public World(int XSize, int YSize, int rockrate)
         {
             this.XSize = XSize;
@@ -34,6 +36,41 @@ namespace Beren
         }
 
         //methods
+        //enemies handling: get enemies list
+        public List<Enemy> GetEnemies()
+        {
+            return Enemies;
+        }
+        //enemies handling: add enemy to the enemies list
+        public void AddEnemy(Enemy InputEnemy)
+        {
+            Enemies.Add(InputEnemy);
+        }
+        //enemies handling: kill enemy and remove it from the enemies list
+        public void KillEnemy(Enemy InputEnemy)
+        {
+            Enemies.Remove(InputEnemy);
+        }
+        //enemies handling: move enemy on the map towards Hero
+        public void MoveEnemy(ref Enemy InputEnemy)
+        {
+            //saving previous enemy state to tempenemy
+            //Creature tempenemy = InputEnemy;
+            //moving enemy towards hero
+            InputEnemy.movetohero();
+            // Move(InputEnemy.GetHeroDirection());
+            //checking 
+            //if (InputEnemy.X > this.XSize - 1)
+            //    InputEnemy.X = this.XSize - 1;
+            //if (InputEnemy.Y > this.YSize - 1)
+            //    InputEnemy.Y = this.YSize - 1;
+            //if (InputEnemy.X < 0)
+            //    InputEnemy.X = 0;
+            //if (InputEnemy.Y < 0)
+            //    InputEnemy.Y = 0;
+            //return 0;
+        }
+        //accessors
         public int[] GetSize()
         {
             int[] Size = new int[2];
@@ -43,14 +80,18 @@ namespace Beren
             //YSize = this.YSize;
             return Size;
         }
-        private void GenerateBarrenWorld(int rockrate)
+        public Hero GetHero()
+        {
+            return Beren;
+        }
+        private void GenerateBarrenTerrain(int rockrate)
         {
             //this.Terrain = new char[this.XSize, this.YSize];
             //create world array
             //create randomizer
             Random rnd = new Random();
-            char tile = ' ';
-            //fill world array
+            char landtile = plainstile;
+            //fill world array with terrain
             for (int x = 0; x < this.XSize; x++)
             {
                 for (int y = 0; y < this.YSize; y++)
@@ -58,22 +99,16 @@ namespace Beren
                     int dice = rnd.Next(1, rockrate + 1);
                     if (dice == rockrate)
                     {
-                        tile = '^';
+                        landtile = rocktile;
                     }
                     else
                     {
-                        tile = '_';
+                        landtile = plainstile;
                     }
-                    this.Terrain[x, y] = tile;
-                    //Console.Write("{0,6}", rnd.Next(-100, 101));
+                    this.WorldArray[x, y].Terrain = landtile;
                 }
-                //Console.WriteLine();
             }
+        }
 
-        }
-        public char GetTerrainTile(int X, int Y)
-        {
-            return this.Terrain[X, Y];
-        }
     }
 }

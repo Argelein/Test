@@ -11,12 +11,11 @@ namespace Beren
         //fields
         int XCoord, YCoord, hp, maxhp;
         public readonly int WorldXSize, WorldYSize;
-
         //properties:
         public int HP
         {
-            get { return hp; }
-            set { hp = value; }
+            get {return hp;}
+            set {hp = value;}
         }
         public int MAXHP
         {
@@ -33,47 +32,25 @@ namespace Beren
             get { return YCoord; }
             set { YCoord = value; }
         }
+
         //constructors:
-        protected Creature()
-        {
-            this.maxhp = 100;
-            this.hp = this.maxhp;
-        }
-        public Creature(ref World World)
-            : this()
-        {
-            this.XCoord = (int)((World.GetSize())[0] / 2);
-            this.YCoord = (int)((World.GetSize())[1] / 2);
-            this.WorldXSize = (World.GetSize())[0];
-            this.WorldYSize = (World.GetSize())[1];
-
-        }
-        public Creature(ref World World, int XCoord, int YCoord)
-            : this()
+        public Creature(World World, int XCoord, int YCoord, int maxhp)
         {
             this.XCoord = XCoord;
             this.YCoord = YCoord;
-            this.WorldXSize = (World.GetSize())[0];
-            this.WorldYSize = (World.GetSize())[1];
-        }
-        public Creature(ref World World, int[] Coords)
-            : this(ref World, Coords[0], Coords[1])
-        {
-
-        }
-        public Creature(ref World World, int XCoord, int YCoord, int maxhp)
-        {
-            this.XCoord = XCoord;
-            this.YCoord = YCoord;
-            this.WorldXSize = (World.GetSize())[0];
-            this.WorldYSize = (World.GetSize())[1];
             this.maxhp = maxhp;
             this.hp = this.maxhp;
+            this.WorldXSize = World.GetSize()[0];
+            this.WorldYSize = World.GetSize()[1];
         }
         public Creature(ref World World, int[] Coords, int maxhp)
-            : this(ref World, Coords[0], Coords[1], maxhp) { }
-
+            : this(World, Coords[0], Coords[1], maxhp) {   }
+        
         //methods
+        public void init()
+        {
+
+        }
         public int Move(int Direction)
         {
             switch (Direction)

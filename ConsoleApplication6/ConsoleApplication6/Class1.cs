@@ -15,8 +15,25 @@ namespace ConsoleApplication6
         //constructor
         public Class1()
         {
-            this.id = rnd.Next(1, 1000);
+            int rand = rnd.Next(1, 1000);
+            this.id = rand;
             this.description = "init";
+        }
+    }
+    class Class2
+    {
+        //field
+        public int id;
+        public Class1 test;
+        Random rnd = new Random();
+        public string description;
+
+        //constructor
+        public Class2()
+        {
+            int rand = rnd.Next(1, 1000);
+            this.id = rand;
+            this.description = "init2";
         }
     }
 }

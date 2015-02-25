@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Beren
 {
-    class Hero
+    class Hero : Creature
     {
     }
 }
